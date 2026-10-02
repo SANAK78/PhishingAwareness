@@ -1,0 +1,15 @@
+2026-10-02 22:43:02,755 [INFO] WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+2026-10-02 22:43:02,755 [INFO] Press CTRL+C to quit
+2026-10-02 22:43:02,757 [INFO]  * Restarting with stat
+2026-10-02 22:43:02,994 [WARNING]  * Debugger is active!
+2026-10-02 22:43:02,997 [INFO]  * Debugger PIN: 171-604-764
+2026-10-02 22:43:21,928 [INFO] 127.0.0.1 - - [02/Oct/2026 22:43:21] "GET / HTTP/1.1" 200 -
+2026-10-02 22:43:48,654 [INFO] SIMULATION_CAUGHT: User fell for mock phishing | Target_Email: 2345@gmail.com | IP: 127.0.0.1 | Password_Length: 11 chars (Zero-Stored) | Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) App
+2026-10-02 22:43:48,655 [INFO] 127.0.0.1 - - [02/Oct/2026 22:43:48] "POST /login-attempt HTTP/1.1" 302 -
+2026-10-02 22:43:48,671 [INFO] 127.0.0.1 - - [02/Oct/2026 22:43:48] "GET /awareness?email=2345@gmail.com HTTP/1.1" 200 -
+2026-10-02 22:44:32,411 [INFO] 127.0.0.1 - - [02/Oct/2026 22:44:32] "POST /analyze-url HTTP/1.1" 200 -
+2026-10-02 22:46:33,503 [INFO] SIMULATION_CAUGHT: User fell for mock phishing | Target_Email: 2007.mainakmondal@gmail.com | IP: 127.0.0.1 | Password_Length: 11 chars (Zero-Stored) | Device: Mozilla/5.0 (Windows NT 10.0; Win64; x64) App
+2026-10-02 22:46:33,504 [INFO] 127.0.0.1 - - [02/Oct/2026 22:46:33] "POST /login-attempt HTTP/1.1" 302 -
+2026-10-02 22:46:33,512 [INFO] 127.0.0.1 - - [02/Oct/2026 22:46:33] "GET /awareness?email=2007.mainakmondal@gmail.com HTTP/1.1" 200 -
+2026-10-02 22:46:51,292 [INFO] 127.0.0.1 - - [02/Oct/2026 22:46:51] "POST /analyze-url HTTP/1.1" 200 -

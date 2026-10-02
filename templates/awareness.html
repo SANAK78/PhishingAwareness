@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Defense Training | Security Awareness Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-base: #040711;
+            --panel-surface: rgba(15, 23, 42, 0.75);
+            --card-surface: rgba(30, 41, 59, 0.5);
+            --border-subtle: rgba(56, 189, 248, 0.16);
+            --accent-cyan: #38bdf8;
+            --accent-green: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-red: #ef4444;
+            --text-heading: #f8fafc;
+            --text-secondary: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-heading);
+            min-height: 100vh;
+            padding: 36px 16px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 860px;
+            background: var(--panel-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 26px;
+            padding: 36px 38px;
+            backdrop-filter: blur(25px);
+            box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-banner {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .hero-icon {
+            font-size: 2.4rem;
+            background: rgba(239, 68, 68, 0.2);
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .hero-text h2 { font-size: 1.45rem; font-weight: 800; color: #fca5a5; margin-bottom: 4px; }
+        .hero-text p { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; }
+
+        .section-title { font-size: 1.15rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--accent-cyan); }
+
+        .red-flags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .flag-card {
+            background: var(--card-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .flag-card:hover { transform: translateY(-2px); border-color: rgba(56, 189, 248, 0.35); }
+        .flag-card h4 { font-size: 0.92rem; font-weight: 700; color: #bae6fd; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .flag-card p { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.5; }
+
+        /* URL Analyzer Tool */
+        .analyzer-box {
+            background: rgba(14, 165, 233, 0.05);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 28px;
+        }
+
+        .analyzer-input-row { display: flex; gap: 10px; margin-top: 12px; }
+        .analyzer-input-row input {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(6, 9, 19, 0.8);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 12px;
+            color: #fff;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .analyzer-input-row button {
+            padding: 12px 20px;
+            background: var(--accent-cyan);
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            color: #040711;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .analyzer-input-row button:hover { filter: brightness(1.1); }
+
+        .result-box {
+            margin-top: 14px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 0.82rem;
+            display: none;
+        }
+
+        .footer-note {
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            display: flex;
+            justify-content: space-between;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Hero Warning -->
+        <div class="hero-banner">
+            <div class="hero-icon">⚠️</div>
+            <div class="hero-text">
+                <h2>Security Alert: You Clicked a Simulated Phishing Test!</h2>
+                <p>An attempt was logged for <strong>{{ target_email }}</strong>. In an actual social engineering attack, your enterprise session and corporate access would have been compromised.</p>
+            </div>
+        </div>
+
+        <!-- Red Flags -->
+        <div class="section-title">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            5 Red Flags You Must Spot in Phishing Attempts
+        </div>
+
+        <div class="red-flags-grid">
+            <div class="flag-card">
+                <h4>⏰ Artificial Urgency</h4>
+                <p>Threat actors create panic ("account suspension in 1 hour") to force victims to bypass critical thinking.</p>
+            </div>
+            <div class="flag-card">
+                <h4>🔗 Lookalike URLs</h4>
+                <p>Typosquatting or excessive subdomains (e.g., <code>company.com.auth-secure.ru</code>) mask malicious endpoints.</p>
+            </div>
+            <div class="flag-card">
+                <h4>🛡️ Zero-Knowledge Breach</h4>
+                <p>Legitimate organizations never ask for raw enterprise passphrases via unexpected emergency links.</p>
+            </div>
+            <div class="flag-card">
+                <h4>📩 Generic Sender Info</h4>
+                <p>Mismatched headers, unusual sender domains, or vague greeting salutations indicate spoofed identities.</p>
+            </div>
+        </div>
+
+        <!-- Interactive URL Security Checker -->
+        <div class="analyzer-box">
+            <h3 style="font-size: 0.98rem; font-weight: 700; color: #bae6fd;">Interactive URL Phishing Validator</h3>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 4px;">Paste any suspicious link below to evaluate against deceptive domain patterns.</p>
+            
+            <div class="analyzer-input-row">
+                <input type="text" id="urlInput" placeholder="http://192.168.1.1/login-verify-account-update" autocomplete="off">
+                <button onclick="checkURL()">Analyze Link</button>
+            </div>
+
+            <div id="resultBox" class="result-box"></div>
+        </div>
+
+        <div class="footer-note">
+            <span>DEFENSIVE LOGGING: ZERO PLAINTEXT SAVED</span>
+            <span>TASK 3 • PHISHING AWARENESS</span>
+        </div>
+    </div>
+
+    <script>
+        async function checkURL() {
+            const urlVal = document.getElementById('urlInput').value.trim();
+            const resBox = document.getElementById('resultBox');
+            if (!urlVal) return;
+
+            try {
+                const response = await fetch('/analyze-url', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url: urlVal })
+                });
+                const data = await response.json();
+                
+                resBox.style.display = 'block';
+                if (data.safe) {
+                    resBox.style.background = 'rgba(16, 185, 129, 0.12)';
+                    resBox.style.border = '1px solid rgba(16, 185, 129, 0.3)';
+                    resBox.style.color = '#6ee7b7';
+                    resBox.innerHTML = '<strong>SAFE:</strong> ' + data.flags[0];
+                } else {
+                    resBox.style.background = 'rgba(239, 68, 68, 0.12)';
+                    resBox.style.border = '1px solid rgba(239, 68, 68, 0.3)';
+                    resBox.style.color = '#fca5a5';
+                    resBox.innerHTML = '<strong>RED FLAGS DETECTED:</strong><br>• ' + data.flags.join('<br>• ');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    </script>
+</body>
+</html>
